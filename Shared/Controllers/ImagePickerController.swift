@@ -41,15 +41,17 @@ struct ImagePickerController: UIViewControllerRepresentable{
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             //Access the original image from the image picker info dictionary then converting it to a PNG file
             let image = info[.originalImage] as! UIImage
+            //Resize and crop image to reduce size before uploading to Firebase
             let shorterSide = min(image.size.width, image.size.height)
-            //Center-crop original image
-            let imageSize = image.size
-            let wCenter = (imageSize.width - shorterSide) / 2.0
-            let hCenter = (imageSize.height - shorterSide) / 2.0
-            let cropZone = CGRect(x: wCenter, y: hCenter, width: shorterSide, height: shorterSide).integral
-            let croppedImage = image.cgImage!.cropping(to: cropZone)
-            //Save image and close the controller
-            parent.imagePicked = (UIImage(cgImage: croppedImage!).pngData())!
+            let ratio = 100.0/shorterSide
+            let newWidth = image.size.width * ratio
+            let newHeight = image.size.height * ratio
+            let resize = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
+            let resizedImage = UIGraphicsImageRenderer(size: CGSize(width: newWidth, height: newWidth)).image{ _ in
+                image.draw(in: resize)
+            }
+            //Save image and close the controller in png format
+            parent.imagePicked = resizedImage.pngData()!
             parent.showImagePicker.toggle()
         }
     }

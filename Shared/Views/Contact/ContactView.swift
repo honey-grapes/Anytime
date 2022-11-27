@@ -47,20 +47,22 @@ struct ContactView: View {
                 if error == nil && snapshot != nil {
                     self.retrievedContacts = [ContactModel]() //Clear the previous iteration of fetched contacts
                     for contact in snapshot!.documents{
-                        group.enter() //Display the contacts after all contacts are loaded
-                        
-                        let phoneNumber = contact["phoneNumber"] as! String
-                        let firstName = contact["firstName"] as! String
-                        let lastName = contact["lastName"] as! String
-                        let profilePicURL = contact["profilePicURL"] as! String
-                        
-                        //Retrieve image data and save Contact into retrievedContacts array
-                        storageRef.child(profilePicURL).getData(maxSize: 10 * 1024 * 1024) { data, error in
-                            if error == nil && data != nil {
-                                contactToReturn.append(ContactModel(firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, profilePic: data!))
-                                updateContact = false //Convert to "true" if a contact is added or when the app was in the background
-                                
-                                group.leave()
+                        autoreleasepool{ //Release temp memory
+                            group.enter() //Display the contacts after all contacts are loaded
+                            
+                            let phoneNumber = contact["phoneNumber"] as! String
+                            let firstName = contact["firstName"] as! String
+                            let lastName = contact["lastName"] as! String
+                            let profilePicURL = contact["profilePicURL"] as! String
+                            
+                            //Retrieve image data and save Contact into retrievedContacts array
+                            storageRef.child(profilePicURL).getData(maxSize: 10 * 1024 * 1024) { data, error in
+                                if error == nil && data != nil {
+                                    contactToReturn.append(ContactModel(firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, profilePic: data!))
+                                    updateContact = false //Convert to "true" if a contact is added or when the app was in the background
+                                    
+                                    group.leave()
+                                }
                             }
                         }
                     }
@@ -112,18 +114,27 @@ struct ContactView: View {
                     ScrollView {
                         LazyVGrid(columns: gridItem, spacing: 5) {
                             ForEach(retrievedContacts) {contact in
-                                VStack (spacing: 0){
-                                    Image(uiImage: UIImage(data: contact.profilePic)!)
-                                        .resizable()
-                                        .frame(width: (UIScreen.main.bounds.width - 15) / 2, height: (UIScreen.main.bounds.width - 15) / 2)
-                                    (Text(contact.lastName) + Text(" ") + Text(contact.firstName))
-                                        .font(.system(size: 20))
-                                        .bold()
-                                        .frame(width: (UIScreen.main.bounds.width - 15) / 2, height: 50)
-                                        .foregroundColor(Color("Primary"))
-                                        .background(Color("Primary Opposite"))
+                                autoreleasepool{ //Release temp memory
+                                    Button(action: {
+                                        let phone = "tel://"
+                                        let phoneNumberformatted = phone + contact.phoneNumber
+                                        guard let url = URL(string: phoneNumberformatted) else { return }
+                                        UIApplication.shared.open(url)
+                                    }){
+                                        VStack (spacing: 0){
+                                            Image(uiImage: UIImage(data: contact.profilePic)!)
+                                                .resizable()
+                                                .frame(width: (UIScreen.main.bounds.width - 15) / 2, height: (UIScreen.main.bounds.width - 15) / 2)
+                                            (Text(contact.lastName) + Text(contact.firstName))
+                                                .font(.system(size: 20))
+                                                .bold()
+                                                .frame(width: (UIScreen.main.bounds.width - 15) / 2, height: 50)
+                                                .foregroundColor(Color("Primary"))
+                                                .background(Color("Primary Opposite"))
+                                        }
+                                        .cornerRadius(20)
+                                    }
                                 }
-                                .cornerRadius(20)
                             }
                         }
                     }
@@ -142,6 +153,23 @@ struct ContactView: View {
             //Contact view
             else{
                 VStack(alignment: .center) {
+                    //Button to manually fetch and refresh contact
+                    Button {
+                        updateContact = true
+                        fetchContact() { contacts in
+                            self.retrievedContacts = contacts
+                        }
+                    } label: {
+                        (Text("更新 ") + Text(Image(systemName: "arrow.clockwise")))
+                            .font(.system(size: 18))
+                            .padding()
+                            .foregroundColor(Color("Primary Opposite"))
+                            .background(Color("Primary"))
+                            .cornerRadius(20)
+                    }
+                    
+                    Spacer()
+                    
                     (Text("尚無聯絡人"))
                         .font(.system(size: 20))
                         .foregroundColor(Color("Secondary"))
