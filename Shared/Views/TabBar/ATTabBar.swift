@@ -17,7 +17,7 @@ struct ATTabBar: View {
     //Binds property and view
     @Binding var selectedTab: Tabs
     @State var addColor: Color = Color("Secondary")
-    @State var contactColor: Color = Color("Primary")
+    @State var contactColor: Color = Color("Primary Pink")
     @State var picColor: Color = Color("Secondary")
     
     var body: some View {

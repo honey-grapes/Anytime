@@ -86,6 +86,7 @@ struct AddView: View {
                             HStack{
                                 Image(systemName: "chevron.right.square.fill")
                                     .font(.system(size:30))
+                                    .foregroundColor(Color("Primary Pink"))
                                 Text("步驟一")
                                     .font(.system(size:30))
                                     .bold()
@@ -111,9 +112,11 @@ struct AddView: View {
                                 .accentColor(Color("Primary"))
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 50)
-                                .background(RoundedRectangle(cornerRadius: 15).stroke(Color("Primary"), lineWidth: 3))
+                                .background(Color("Light"))
+                                .cornerRadius(15)
                             }
                         }
+                        .foregroundColor(Color("Primary"))
                         
                         //=========================================================
                         //
@@ -124,6 +127,7 @@ struct AddView: View {
                             HStack{
                                 Image(systemName: "chevron.right.square.fill")
                                     .font(.system(size:30))
+                                    .foregroundColor(Color("Primary Pink"))
                                 Text("步驟二")
                                     .font(.system(size:30))
                                     .bold()
@@ -138,8 +142,10 @@ struct AddView: View {
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 150)
                                 .multilineTextAlignment(.center)
-                                .background(RoundedRectangle(cornerRadius: 30).stroke(Color("Primary"), lineWidth: 5))
+                                .background(Color("Light"))
+                                .cornerRadius(20)
                         }
+                        .foregroundColor(Color("Primary"))
                         
                         //Turn on text scanner button
                         VStack(alignment: .leading, spacing: 20){
@@ -150,6 +156,7 @@ struct AddView: View {
                                     .font(.system(size:20))
                                     .lineSpacing(5)
                             }
+                            .foregroundColor(Color("Primary"))
                             
                             //Presenting the data scanner sheet
                             VStack {
@@ -185,11 +192,12 @@ struct AddView: View {
                                         .padding([.leading],20)
                                 
                                     (Text("讀取成功\n").font(.system(size: 35)).bold() + Text("\n").font(.system(size: 5)) + (Text("姓氏： " + lastName + "\n") + Text("名字： " + firstName + "\n") + Text("電話： " + phoneNumber))
-                                            .font(.system(size: 20)))
+                                            .font(.system(size: 15)))
                                             .padding()
                                             .foregroundColor(Color("Primary"))
                                             .frame(height: 180)
                                             .frame(maxWidth: .infinity, alignment: .leading)
+                                            .foregroundColor(Color("Primary"))
                                 }
                                 .background(RoundedRectangle(cornerRadius: 25).stroke(Color("Green Check"), lineWidth: 5))
                            }
@@ -205,14 +213,18 @@ struct AddView: View {
                             HStack{
                                 Image(systemName: "chevron.right.square.fill")
                                     .font(.system(size:30))
+                                    .foregroundColor(Color("Primary Pink"))
                                 Text("步驟三")
                                     .font(.system(size:30))
                                     .bold()
                             }
+                            .foregroundColor(Color("Primary"))
+                            
                             //Step 3 instruction
                             Text("請用以下其中一種方式設定聯絡人的頭像")
                                 .font(.system(size:20))
                                 .lineSpacing(5)
+                                .foregroundColor(Color("Primary"))
                             
                             //Upload from camera
                             Button{
@@ -232,6 +244,7 @@ struct AddView: View {
                             Text("或者")
                                 .frame(maxWidth: .infinity, alignment:.center)
                                 .font(.system(size:20))
+                                .foregroundColor(Color("Primary"))
                             
                             //Upload from photo album
                             Button{
@@ -283,7 +296,6 @@ struct AddView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.leading,.trailing],40)
                     .padding([.top],20)
-                    .background(Color("Background"))
                     
                     //Submit or cancel
                     VStack(alignment: .leading, spacing: 10){
@@ -311,6 +323,7 @@ struct AddView: View {
                     .padding([.top], 10)
                 }
             }
+            .background(Color("Background"))
             
             if contactAdded {
                 AlertView(show: $contactAdded, inputToDelete: .constant(""), errorMsg: "成功添加聯絡人", buttonName: "確認")

@@ -13,7 +13,7 @@ struct ATTabButton: View {
     var isActive: Bool
     
     var body: some View {
-        let iconColor = isActive ? Color("Primary") : Color("Secondary")
+        let iconColor = isActive ? Color("Primary Pink") : Color("Secondary")
         
         VStack (alignment: .center, spacing: 7){
             Image(systemName: buttonIcon)

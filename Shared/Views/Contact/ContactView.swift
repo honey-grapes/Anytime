@@ -86,33 +86,38 @@ struct ContactView: View {
             //No contact view
             if haveContacts {
                 VStack(alignment: .leading){
-                    HStack(alignment: .center) {
-                        (Text("請點擊聯絡人通話"))
-                            .font(.system(size: 20))
-                            .bold()
-                        
-                        Spacer()
-                        
-                        //Button to manually fetch and refresh contact
-                        Button {
-                            updateContact = true
-                            fetchContact() { contacts in
-                                self.retrievedContacts = contacts
-                            }
-                        } label: {
-                            (Text("更新 ") + Text(Image(systemName: "arrow.clockwise")))
-                                .font(.system(size: 18))
-                                .padding()
-                                .foregroundColor(Color("Primary Opposite"))
-                                .background(Color("Primary"))
-                                .cornerRadius(20)
-                        }
-                    }
-                    .padding([.leading,.trailing],40)
-                    .padding([.top],10)
-                    
                     ScrollView {
-                        LazyVGrid(columns: gridItem, spacing: 5) {
+                        //Refresh button and instruction
+                        HStack(alignment: .center) {
+                            (Text("請點擊聯絡人通話"))
+                                .font(.system(size: 20))
+                                .bold()
+                                .padding(.trailing, 10)
+                                .foregroundColor(Color("Primary"))
+                            
+                            //Button to manually fetch and refresh contact
+                            Button {
+                                updateContact = true
+                                fetchContact() { contacts in
+                                    self.retrievedContacts = contacts
+                                }
+                            } label: {
+                                (Text("更新 ") + Text(Image(systemName: "arrow.clockwise")))
+                                    .font(.system(size: 18))
+                                    .bold()
+                                    .padding([.top,.bottom], 6)
+                                    .padding([.leading,.trailing], 15)
+                                    .foregroundColor(Color("Primary Opposite"))
+                                    .background(Color("Primary Pink"))
+                                    .cornerRadius(20)
+                            }
+                        }
+                        .padding([.leading,.trailing],40)
+                        .padding([.top],20)
+                        .frame(maxWidth: .infinity)
+                        
+                        //Display contacts
+                        LazyVGrid(columns: gridItem, spacing: 6) {
                             ForEach(retrievedContacts) {contact in
                                 autoreleasepool{ //Release temp memory
                                     Button(action: {

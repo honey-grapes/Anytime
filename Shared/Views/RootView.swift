@@ -7,10 +7,13 @@
 
 import SwiftUI
 
+//Default values for user defaults
 enum DefaultSettings {
     static let login_status = false
     static let darkMode = false
     static let updateContact = true
+    static let user_number = ""
+    static let contact_numbers: [String] = []
 }
 
 @available(iOS 16.0, *)

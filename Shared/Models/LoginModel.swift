@@ -34,6 +34,7 @@ class LoginModel: ObservableObject {
     
     //Login status
     @AppStorage("login_status") var login_status = DefaultSettings.login_status
+    @AppStorage("user_number") var user_number = DefaultSettings.user_number
     
     //Get reference to the Firestore
     let db = Firestore.firestore()
@@ -55,6 +56,7 @@ class LoginModel: ObservableObject {
             if let document = document, document.exists {}
             else {
                 let userNumber = self.areaCode + self.userPhone
+                self.user_number = userNumber
                 ref.setData(["uuid": self.uuid!, "userNumber": userNumber])
             }
         }

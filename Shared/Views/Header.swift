@@ -24,18 +24,21 @@ struct Header: View {
                     .fontWeight(.bold)
                     .padding(.top,20)
                     .padding(.leading,40)
+                    .foregroundColor(Color("Primary"))
             } else if curTab == .contact {
                 Text(tabHeader2)
                     .font(.system(size: 40))
                     .fontWeight(.bold)
                     .padding(.top,20)
                     .padding(.leading,40)
+                    .foregroundColor(Color("Primary"))
             } else {
                 Text(tabHeader3)
                     .font(.system(size: 40))
                     .fontWeight(.bold)
                     .padding(.top,20)
                     .padding(.leading,40)
+                    .foregroundColor(Color("Primary"))
             }
             
             Spacer()

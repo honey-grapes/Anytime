@@ -32,12 +32,14 @@ struct LoadView: View {
                     .font(.system(size: 20))
                 ProgressView()
                     .scaleEffect(2)
+                    .tint(Color("Primary Opposite"))
                     .padding()
             }
             .frame(width: UIScreen.main.bounds.width - 180, alignment: .center)
             .padding([.top,.bottom],25)
             .padding([.leading,.trailing],25)
-            .background(Color("Primary Opposite"))
+            .foregroundColor(Color("Primary Opposite"))
+            .background(Color("Primary Pink"))
             .cornerRadius(15)
         }
     }
