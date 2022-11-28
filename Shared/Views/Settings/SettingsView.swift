@@ -26,6 +26,7 @@ struct SettingsView: View {
                 Text("設定")
                     .font(.system(size: 40))
                     .fontWeight(.bold)
+                    .foregroundColor(Color("Primary"))
                 
                 //Switch light and dark modes
                 VStack(spacing: 10){

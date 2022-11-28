@@ -23,12 +23,15 @@ struct ScannerView: View {
         VStack(alignment: .center){
             //Instruction
             VStack(alignment: .leading){
-                (Text("⚠️ 請在明亮處將相機對準聯絡人資料，看到字字清晰，周圍出現")+(Text("黃色框框")+Text(Image(systemName: "square.dashed"))).bold().foregroundColor(Color("Yellow Box"))+Text("後，") + Text("按下").bold() + (Text("黃色框框")+Text(Image(systemName: "square.dashed"))).bold().foregroundColor(Color("Yellow Box")) + Text("讀取資料"))
+                (Text("⚠️  請在明亮處將相機對準聯絡人資料，看到字字清晰，周圍出現")+(Text("黃色框框")+Text(Image(systemName: "square.dashed"))).bold().foregroundColor(Color("Yellow Box"))+Text("後，") + Text("按下").bold() + (Text("黃色框框")+Text(Image(systemName: "square.dashed"))).bold().foregroundColor(Color("Yellow Box")) + Text("讀取資料"))
                     .font(.system(size: 20))
                     .frame(alignment: .center)
-                    .lineSpacing(10)
+                    .lineSpacing(5)
+                
                 ScannerViewController(openScanner: $openScanner, scanResult: $scanResult)
-            }.padding()
+                    .cornerRadius(20)
+            }
+            .padding()
             
             //Instruction and scanned information preview
             VStack (alignment: .center, spacing: 5) {
@@ -38,12 +41,14 @@ struct ScannerView: View {
                     .font(.system(size: 20))
                 
                 VStack{
-                    Text((scanResult == "") ? "\n⌛️等待讀取...\n" : scanResult)
+                    Text((scanResult == "") ? "\n⌛️ 等待讀取...\n" : scanResult)
                         .font(.system(size: 20))
                         .frame(maxWidth: .infinity)
                         .frame(height: 120)
                         .padding()
-                        .background(RoundedRectangle(cornerRadius: 25).stroke(Color("Primary"), lineWidth: 3))
+                        .foregroundColor(Color("Primary"))
+                        .background(Color("Background"))
+                        .cornerRadius(20)
                 }
                 .padding([.top,.leading,.trailing],20)
                 
@@ -91,6 +96,7 @@ struct ScannerView: View {
             }
         }
         .padding(20)
+        .foregroundColor(Color("Primary"))
     }
 }
 

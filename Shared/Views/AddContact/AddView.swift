@@ -41,7 +41,6 @@ struct AddView: View {
     @AppStorage("updateContact") var updateContact = DefaultSettings.updateContact
     
     //Function to upload image to Firebase Storage
-    @State var photoUploaded = false
     func uploadContact() {
         //Create storage reference and file path
         let storageRef = Storage.storage().reference()
@@ -83,38 +82,46 @@ struct AddView: View {
                     VStack(spacing: 40){
                         //Step 1: Setting up the area code
                         VStack(alignment: .leading, spacing: 20){
+                            //Step 1 label
                             HStack{
                                 Image(systemName: "chevron.right.square.fill")
-                                    .font(.system(size:30))
-                                    .foregroundColor(Color("Primary Pink"))
+                                    .font(.system(size:25))
                                 Text("步驟一")
-                                    .font(.system(size:30))
+                                    .font(.system(size:25))
                                     .bold()
                             }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                            .foregroundColor(Color("Primary Opposite"))
+                            .background(Color("Primary Pink"))
+                            .cornerRadius(30)
                             
-                            (Text("請選擇聯絡人的")+Text("電話區號").bold())
-                                .font(.system(size:20))
-                                .lineSpacing(5)
-                            
-                            //Input area code
-                            HStack(spacing: 20){
-                                Text("電話區號")
-                                    .font(.system(size: 20))
-                                    .bold()
-                                    .multilineTextAlignment(.center)
+                            VStack (alignment: .leading) {
+                                (Text("請選擇聯絡人的")+Text("電話區號").bold())
+                                    .font(.system(size:20))
                                     .lineSpacing(5)
                                 
-                                Picker(selection: $areaCode, label: Text("")) {
-                                    Text("+1").tag("+1")
-                                    Text("+886").tag("+886")
+                                //Input area code
+                                HStack(spacing: 20){
+                                    Text("電話區號")
+                                        .font(.system(size: 20))
+                                        .bold()
+                                        .multilineTextAlignment(.center)
+                                        .lineSpacing(5)
+                                    
+                                    Picker(selection: $areaCode, label: Text("")) {
+                                        Text("+1").tag("+1")
+                                        Text("+886").tag("+886")
+                                    }
+                                    .scaleEffect(1.2)
+                                    .accentColor(Color("Primary"))
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 50)
+                                    .background(Color("Light"))
+                                    .cornerRadius(15)
                                 }
-                                .scaleEffect(1.2)
-                                .accentColor(Color("Primary"))
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 50)
-                                .background(Color("Light"))
-                                .cornerRadius(15)
                             }
+                            .padding([.leading,.trailing],15)
                         }
                         .foregroundColor(Color("Primary"))
                         
@@ -124,26 +131,35 @@ struct AddView: View {
                         //
                         //=========================================================
                         VStack(alignment: .leading, spacing: 20){
+                            //Step 2 label
                             HStack{
                                 Image(systemName: "chevron.right.square.fill")
-                                    .font(.system(size:30))
-                                    .foregroundColor(Color("Primary Pink"))
+                                    .font(.system(size:25))
                                 Text("步驟二")
-                                    .font(.system(size:30))
+                                    .font(.system(size:25))
                                     .bold()
                             }
-                            //Sample info for reference
-                            (Text("請在白紙上")+Text("分三行工整書寫").bold()+Text("聯絡人姓、名、電話。範例："))
-                                .font(.system(size:20))
-                                .lineSpacing(5)
-                            Text("王\n小明\n12345678")
-                                .font(.system(size:25).bold())
-                                .lineSpacing(10)
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 150)
-                                .multilineTextAlignment(.center)
-                                .background(Color("Light"))
-                                .cornerRadius(20)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                            .foregroundColor(Color("Primary Opposite"))
+                            .background(Color("Primary Pink"))
+                            .cornerRadius(30)
+                            
+                            VStack (alignment: .leading){
+                                //Sample info for reference
+                                (Text("請在白紙上")+Text("分三行工整書寫").bold()+Text("聯絡人姓、名、電話。範例："))
+                                    .font(.system(size:20))
+                                    .lineSpacing(5)
+                                Text("王\n小明\n12345678")
+                                    .font(.system(size:25).bold())
+                                    .lineSpacing(10)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 150)
+                                    .multilineTextAlignment(.center)
+                                    .background(Color("Light"))
+                                    .cornerRadius(20)
+                            }
+                            .padding([.leading,.trailing],15)
                         }
                         .foregroundColor(Color("Primary"))
                         
@@ -185,22 +201,36 @@ struct AddView: View {
                             
                             //Present the scan result to the user to show that the data has been successfully scanned
                             if scanResult != "" {
-                            HStack{
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .font(.system(size: 80))
-                                        .foregroundColor(Color("Green Check"))
-                                        .padding([.leading],20)
-                                
-                                    (Text("讀取成功\n").font(.system(size: 35)).bold() + Text("\n").font(.system(size: 5)) + (Text("姓氏： " + lastName + "\n") + Text("名字： " + firstName + "\n") + Text("電話： " + phoneNumber))
-                                            .font(.system(size: 15)))
-                                            .padding()
-                                            .foregroundColor(Color("Primary"))
-                                            .frame(height: 180)
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .foregroundColor(Color("Primary"))
+                                VStack(spacing: 5){
+                                    HStack{
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .font(.system(size: 80))
+                                            .padding([.leading],20)
+                                        
+                                        (Text("讀取成功\n").font(.system(size: 35)).bold().foregroundColor(Color("Primary Pink")) + Text("\n").font(.system(size: 5)) + (Text("姓氏： " + lastName + "\n") + Text("名字： " + firstName + "\n") + Text("電話： " + phoneNumber))
+                                                .font(.system(size: 18)))
+                                                .padding()
+                                                .frame(height: 150)
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .foregroundColor(Color("Primary"))
+                                    }
+                                    
+                                    //Clear and remove info
+                                    Button {
+                                        lastName = ""
+                                        firstName = ""
+                                        phoneNumber = ""
+                                        scanResult = ""
+                                    } label: {
+                                        GenericButton(buttonText: "清除資料重來", bgColor: Color("Cancel"), fgColor: Color("Button Text"), height: 70, fontSize: 20, curve: 20)
+                                    }
+                                    .padding([.bottom, .leading, .trailing], 20)
                                 }
-                                .background(RoundedRectangle(cornerRadius: 25).stroke(Color("Green Check"), lineWidth: 5))
-                           }
+                                .foregroundColor(Color("Primary Pink"))
+                                //.background(RoundedRectangle(cornerRadius: 20).stroke(Color("Primary Pink"), lineWidth: 10))
+                                .background(Color("Primary Opposite"))
+                                .cornerRadius(20)
+                            }
                         }
                         
                         //=========================================================
@@ -212,89 +242,100 @@ struct AddView: View {
                             //Step 3 label
                             HStack{
                                 Image(systemName: "chevron.right.square.fill")
-                                    .font(.system(size:30))
-                                    .foregroundColor(Color("Primary Pink"))
+                                    .font(.system(size:25))
                                 Text("步驟三")
-                                    .font(.system(size:30))
+                                    .font(.system(size:25))
                                     .bold()
                             }
-                            .foregroundColor(Color("Primary"))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                            .foregroundColor(Color("Primary Opposite"))
+                            .background(Color("Primary Pink"))
+                            .cornerRadius(30)
                             
-                            //Step 3 instruction
-                            Text("請用以下其中一種方式設定聯絡人的頭像")
-                                .font(.system(size:20))
-                                .lineSpacing(5)
-                                .foregroundColor(Color("Primary"))
-                            
-                            //Upload from camera
-                            Button{
-                                showImagePicker = true
-                                imagePickerSource = .camera
-                            } label:{
-                                AddContactButton(contactButtonText: "現場照相", contactButtonIcon: "camera.fill")
-                            }
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 200)
-                            .background(Color("Primary"))
-                            .cornerRadius(20)
-                            .sheet(isPresented: $showImagePicker) {
-                                ImagePickerView(imagePicked: $imagePicked, imagePickerSource: $imagePickerSource, showImagePicker: $showImagePicker)
-                            }
-                            
-                            Text("或者")
-                                .frame(maxWidth: .infinity, alignment:.center)
-                                .font(.system(size:20))
-                                .foregroundColor(Color("Primary"))
-                            
-                            //Upload from photo album
-                            Button{
-                                showImagePicker = true
-                                imagePickerSource = .photoLibrary
-                            } label:{
-                                AddContactButton(contactButtonText: "從相簿選取", contactButtonIcon: "rectangle.stack.fill.badge.plus")
-                            }
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 200)
-                            .background(Color("Primary"))
-                            .cornerRadius(20)
-                            .sheet(isPresented: $showImagePicker) {
-                                ImagePickerView(imagePicked: $imagePicked, imagePickerSource: $imagePickerSource, showImagePicker: $showImagePicker)
-                            }
-                            
-                            //Present the image picker result
-                            if imagePicked.count != 0 {
-                                VStack{
-                                    (Text(Image(systemName: "checkmark.circle.fill"))
-                                            .font(.system(size: 50))
-                                            .foregroundColor(Color("Green Check"))
-                                     + Text(" 頭像選取成功")
-                                            .font(.system(size: 30))
-                                            .bold()
-                                            .foregroundColor(Color("Primary")))
-                                        .padding([.top,.leading,.trailing], 20)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                    
-                                    Image(uiImage:UIImage(data: self.imagePicked)!)
-                                        .resizable()
-                                        .frame(alignment: .center)
-                                        .frame(maxWidth: .infinity)
-                                        .scaledToFill()
-                                        .padding([.leading,.trailing],20)
-                                    
-                                    //Clear and remove image
-                                    Button {
-                                        imagePicked.removeAll(keepingCapacity: false)
-                                    } label: {
-                                        GenericButton(buttonText: "清除圖片重來", bgColor: Color("Cancel"), fgColor: Color("Button Text"), height: 70, fontSize: 20, curve: 20)
-                                    }
-                                    .padding([.bottom, .leading, .trailing], 20)
+                            VStack{
+                                //Step 3 instruction
+                                Text("請用以下其中一種方式設定聯絡人的頭像")
+                                    .font(.system(size:20))
+                                    .lineSpacing(5)
+                                    .foregroundColor(Color("Primary"))
+                                
+                                //Upload from camera
+                                Button{
+                                    showImagePicker = true
+                                    imagePickerSource = .camera
+                                } label:{
+                                    AddContactButton(contactButtonText: "現場照相", contactButtonIcon: "camera.fill")
                                 }
-                                .background(RoundedRectangle(cornerRadius: 25).stroke(Color("Green Check"), lineWidth: 5))
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 200)
+                                .background(Color("Primary"))
+                                .cornerRadius(20)
+                                .sheet(isPresented: $showImagePicker) {
+                                    ImagePickerView(imagePicked: $imagePicked, imagePickerSource: $imagePickerSource, showImagePicker: $showImagePicker)
+                                }
+                                
+                                Text("或者")
+                                    .frame(maxWidth: .infinity, alignment:.center)
+                                    .font(.system(size:20))
+                                    .foregroundColor(Color("Primary"))
+                                
+                                //Upload from photo album
+                                Button{
+                                    showImagePicker = true
+                                    imagePickerSource = .photoLibrary
+                                } label:{
+                                    AddContactButton(contactButtonText: "從相簿選取", contactButtonIcon: "rectangle.stack.fill.badge.plus")
+                                }
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 200)
+                                .background(Color("Primary"))
+                                .cornerRadius(20)
+                                .sheet(isPresented: $showImagePicker) {
+                                    ImagePickerView(imagePicked: $imagePicked, imagePickerSource: $imagePickerSource, showImagePicker: $showImagePicker)
+                                }
+                                
+                                //Present the image picker result
+                                if imagePicked.count != 0 {
+                                    VStack (spacing: 0){
+                                        HStack(alignment: .center, spacing: 5){
+                                            Text(Image(systemName: "checkmark.circle.fill"))
+                                                .font(.system(size: 55))
+                                            
+                                            Text(" 頭像選取成功")
+                                                .font(.system(size: 30))
+                                                .bold()
+                                        }
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                        .foregroundColor(Color("Primary Pink"))
+                                        .padding([.top,.trailing], 20)
+                                        .padding(.leading,10)
+                    
+                                        Image(uiImage:UIImage(named: "Leopard")!)//data: self.imagePicked)!)
+                                            .resizable()
+                                            .frame(alignment: .center)
+                                            .frame(maxWidth: .infinity)
+                                            .scaledToFill()
+                                            .padding(20)
+                                        
+                                        //Clear and remove image
+                                        Button {
+                                            imagePicked.removeAll(keepingCapacity: false)
+                                        } label: {
+                                            GenericButton(buttonText: "清除圖片重來", bgColor: Color("Cancel"), fgColor: Color("Button Text"), height: 70, fontSize: 20, curve: 20)
+                                        }
+                                        .padding([.leading,.trailing,.bottom],20)
+                                    }
+                                    .foregroundColor(Color("Primary"))
+                                    .background(Color("Primary Opposite"))
+                                    .cornerRadius(20)
+                                    .padding(.top,15)
+                                }
                             }
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding([.leading,.trailing],40)
+                    .padding([.leading,.trailing],25)
                     .padding([.top],20)
                     
                     //Submit or cancel
@@ -302,9 +343,9 @@ struct AddView: View {
                         Button{
                             uploadContact()
                         } label:{
-                            GenericButton(buttonText: "添加聯絡人", bgColor: (photoUploaded && scanResult != "") ? Color("Confirm") : Color("Confirm").opacity(0.7), fgColor: Color("Button Text"), height:70, fontSize:20, curve: 20)
+                            GenericButton(buttonText: "添加聯絡人", bgColor: (imagePicked.count > 0 && scanResult != "") ? Color("Confirm") : Color("Confirm").opacity(0.5), fgColor: Color("Button Text"), height:70, fontSize:20, curve: 20)
                         }
-                        .disabled(photoUploaded && scanResult != "")
+                        .disabled(!(imagePicked.count > 0 && scanResult != ""))
                         
                         Button{
                             firstName = ""
