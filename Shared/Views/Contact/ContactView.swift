@@ -118,7 +118,7 @@ struct ContactView: View {
                                     .bold()
                                     .padding([.top,.bottom], 6)
                                     .padding([.leading,.trailing], 15)
-                                    .foregroundColor(Color("Primary Opposite"))
+                                    .foregroundColor(Color("Button Text"))
                                     .background(Color("Primary Pink"))
                                     .cornerRadius(20)
                             }

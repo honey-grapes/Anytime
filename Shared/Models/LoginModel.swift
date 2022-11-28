@@ -56,7 +56,6 @@ class LoginModel: ObservableObject {
             if let document = document, document.exists {}
             else {
                 let userNumber = self.areaCode + self.userPhone
-                self.userNumber = userNumber
                 ref.setData(["uuid": self.uuid!, "userNumber": userNumber])
             }
         }
@@ -65,7 +64,7 @@ class LoginModel: ObservableObject {
     //Send verification code
     func sendCode() {
         //Enable testing, comment out when not testing
-        //Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+        Auth.auth().settings?.isAppVerificationDisabledForTesting = true
         
         //Turn on loading view
         self.loading = true
@@ -74,6 +73,7 @@ class LoginModel: ObservableObject {
             verCode, err in
             //Turn off loading view
             self.loading = false
+            self.userNumber = self.areaCode + self.userPhone
             
             if let error = err {
                 self.showAlertPhone.toggle()

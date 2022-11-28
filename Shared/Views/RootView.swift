@@ -12,6 +12,7 @@ enum DefaultSettings {
     static let login_status = false
     static let darkMode = false
     static let updateContact = true
+    static let updatePosts = true
     static let userNumber = ""
     static let contactsList = Data()
 }

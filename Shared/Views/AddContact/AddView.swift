@@ -40,7 +40,7 @@ struct AddView: View {
     //Tell contactView to update contacts
     @AppStorage("updateContact") var updateContact = DefaultSettings.updateContact
     
-    //Function to upload image to Firebase Storage
+    //Function to upload contact to Firebase Storage
     func uploadContact() {
         //Create storage reference and file path
         let storageRef = Storage.storage().reference()
@@ -92,7 +92,7 @@ struct AddView: View {
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding()
-                            .foregroundColor(Color("Primary Opposite"))
+                            .foregroundColor(Color("Button Text"))
                             .background(Color("Primary Pink"))
                             .cornerRadius(30)
                             
@@ -141,7 +141,7 @@ struct AddView: View {
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding()
-                            .foregroundColor(Color("Primary Opposite"))
+                            .foregroundColor(Color("Button Text"))
                             .background(Color("Primary Pink"))
                             .cornerRadius(30)
                             
@@ -184,7 +184,7 @@ struct AddView: View {
                                         scannerNotAvailableAlert = true
                                     }
                                 } label:{
-                                    AddContactButton(contactButtonText: "讀取資料", contactButtonIcon: "camera.fill")
+                                    AddContactButton(contactButtonText: "讀取資料", contactButtonIcon: "camera.fill", color: "Primary Opposite")
                                 }
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 200)
@@ -249,7 +249,7 @@ struct AddView: View {
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding()
-                            .foregroundColor(Color("Primary Opposite"))
+                            .foregroundColor(Color("Button Text"))
                             .background(Color("Primary Pink"))
                             .cornerRadius(30)
                             
@@ -265,7 +265,7 @@ struct AddView: View {
                                     showImagePicker = true
                                     imagePickerSource = .camera
                                 } label:{
-                                    AddContactButton(contactButtonText: "現場照相", contactButtonIcon: "camera.fill")
+                                    AddContactButton(contactButtonText: "現場照相", contactButtonIcon: "camera.fill", color: "Primary Opposite")
                                 }
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 200)
@@ -285,7 +285,7 @@ struct AddView: View {
                                     showImagePicker = true
                                     imagePickerSource = .photoLibrary
                                 } label:{
-                                    AddContactButton(contactButtonText: "從相簿選取", contactButtonIcon: "rectangle.stack.fill.badge.plus")
+                                    AddContactButton(contactButtonText: "從相簿選取", contactButtonIcon: "rectangle.stack.fill.badge.plus", color: "Primary Opposite")
                                 }
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 200)
