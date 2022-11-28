@@ -17,6 +17,7 @@ struct ContactView: View {
     
     //Fetch contacts only when the app launches or when a new contact is added
     @AppStorage("updateContact") var updateContact = DefaultSettings.updateContact
+    @AppStorage("contactsList") var contactsList: Data = DefaultSettings.contactsList
     @State var retrievedContacts: [ContactModel] = []
     
     //Dictates which view to show
@@ -45,7 +46,11 @@ struct ContactView: View {
                 }
                 
                 if error == nil && snapshot != nil {
-                    self.retrievedContacts = [ContactModel]() //Clear the previous iteration of fetched contacts
+                    //Clear the previous iteration of fetched contacts
+                    self.retrievedContacts = [ContactModel]()
+                    //Temporary dictionary of contact phone:name key value pairs
+                    var tmp_contacts:[String:String] = [:]
+                    
                     for contact in snapshot!.documents{
                         autoreleasepool{ //Release temp memory
                             group.enter() //Display the contacts after all contacts are loaded
@@ -54,6 +59,9 @@ struct ContactView: View {
                             let firstName = contact["firstName"] as! String
                             let lastName = contact["lastName"] as! String
                             let profilePicURL = contact["profilePicURL"] as! String
+                            
+                            //Add contact key value pair into temp dictionary
+                            tmp_contacts[phoneNumber] = lastName + firstName
                             
                             //Retrieve image data and save Contact into retrievedContacts array
                             storageRef.child(profilePicURL).getData(maxSize: 10 * 1024 * 1024) { data, error in
@@ -69,6 +77,9 @@ struct ContactView: View {
                     group.notify(queue: .main) {
                         //Turn off loading view
                         loading = false
+                        //Save temporary dictionary to UserDefaults
+                        guard let contactsList = try? JSONEncoder().encode(tmp_contacts) else {return}
+                        self.contactsList = contactsList
                         
                         completion(contactToReturn.sorted{ (contact1, contact2) -> Bool in
                             return (contact1.lastName, contact1.firstName) < (contact2.lastName, contact2.firstName)

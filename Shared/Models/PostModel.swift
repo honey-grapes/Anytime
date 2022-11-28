@@ -9,7 +9,8 @@ import Foundation
 
 struct PostModel: Identifiable {
     var id: String
-    var author_uuid: String
-    var liked: Bool
+    var date: String
+    var authorPhone: String //If author's phone number matches contact list or self then show the post
     var postPic: Data
+    var liked: [String] //A list of contacts who liked the post
 }

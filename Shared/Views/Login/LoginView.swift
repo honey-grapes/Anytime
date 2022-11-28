@@ -29,7 +29,8 @@ struct LoginView: View {
                     Text("您好！")
                         .font(.system(size: 48))
                         .bold()
-                    Text("歡迎使用通話易 🎉")
+                    
+                    (Text("歡迎使用") + Text("通話易 🎉").foregroundColor(Color("Primary Pink")))
                         .font(.system(size: 35))
                         .bold()
                         .foregroundColor(Color("Secondary"))
@@ -39,7 +40,7 @@ struct LoginView: View {
                 Spacer()
                 
                 //User input
-                VStack(alignment: .center, spacing: 25){
+                VStack(alignment: .center, spacing: 20){
                     Text("請輸入您的手機號碼")
                         .font(.system(size: 25))
                         .bold()
@@ -47,12 +48,6 @@ struct LoginView: View {
                     VStack(alignment: .center, spacing: 15){
                         //Input area code
                         HStack(spacing: 20){
-                            Text("電話區號")
-                                .font(.system(size: 20))
-                                .bold()
-                                .multilineTextAlignment(.center)
-                                .lineSpacing(5)
-                            
                             Picker(selection: $login.areaCode, label: Text("")) {
                                 Text("+1").tag("+1")
                                 Text("+886").tag("+886")
@@ -60,8 +55,9 @@ struct LoginView: View {
                             .scaleEffect(1.2)
                             .accentColor(Color("Primary"))
                             .frame(maxWidth: .infinity)
-                            .frame(height: 70)
-                            .background(RoundedRectangle(cornerRadius: 20).stroke(Color("Background"), lineWidth: 3))
+                            .padding()
+                            .background(Color("Background"))
+                            .cornerRadius(30)
                         }
                            
                         //Input phone number
@@ -93,9 +89,11 @@ struct LoginView: View {
                             }
                         }
                         .padding()
+                        .padding([.leading,.trailing],15)
                         .frame(height: 70)
-                        .background(RoundedRectangle(cornerRadius: 20).stroke(Color("Background"), lineWidth: 3))
+                        .background(Color("Background"))
                         .font(.system(size: 20))
+                        .cornerRadius(30)
                         
                         //Warning for non-numerical value
                         if isNotNumber{
@@ -108,7 +106,7 @@ struct LoginView: View {
                         NavigationLink(destination: VerificationView(login: login), isActive: $login.showVerifyView){
                             Button(action: login.sendCode,
                                    label: {
-                                GenericButton(buttonText: "獲取驗證碼", bgColor: isAcceptable ? Color("Primary"): Color("Secondary"), fgColor: Color("Primary Opposite"), height:70, fontSize:20, curve: 20)
+                                GenericButton(buttonText: "獲取驗證碼", bgColor: isAcceptable ? Color("Primary Pink"): Color("Primary Pink").opacity(0.5), fgColor: Color("Primary Opposite"), height:70, fontSize:20, curve: 30)
                             })
                             .disabled(!isAcceptable)
                         }
@@ -123,6 +121,7 @@ struct LoginView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding([.leading,.trailing],40)
             .padding([.top,.bottom],20)
+            .foregroundColor(Color("Primary"))
             
             if login.showAlertPhone {
                 AlertView(show: $login.showAlertPhone, inputToDelete: $login.userPhone, errorMsg: login.alertMsgPhone, buttonName: "重試")

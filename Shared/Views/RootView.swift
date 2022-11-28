@@ -12,13 +12,13 @@ enum DefaultSettings {
     static let login_status = false
     static let darkMode = false
     static let updateContact = true
-    static let user_number = ""
-    static let contact_numbers: [String] = []
+    static let userNumber = ""
+    static let contactsList = Data()
 }
 
 @available(iOS 16.0, *)
 struct RootView: View {
-    //User Default
+    //UserDefaults
     @AppStorage("isDarkMode") var isDarkMode = DefaultSettings.darkMode
     @AppStorage("login_status") var login_status = DefaultSettings.login_status
     @AppStorage("updateContact") var updateContact = DefaultSettings.updateContact

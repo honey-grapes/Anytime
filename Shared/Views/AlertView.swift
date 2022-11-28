@@ -28,7 +28,7 @@ struct AlertView: View {
                     inputToDelete = ""
                     show.toggle()
                 }, label: {
-                    GenericButton(buttonText: buttonName, bgColor: Color("Confirm"), fgColor: Color("Button Text"), height: 40, fontSize: 20, curve: 15)
+                    GenericButton(buttonText: buttonName, bgColor: Color("Primary Pink"), fgColor: Color("Button Text"), height: 40, fontSize: 20, curve: 20)
                 })
             }
             .frame(width: UIScreen.main.bounds.width - 180, alignment: .center)
@@ -38,6 +38,7 @@ struct AlertView: View {
             .cornerRadius(15)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .foregroundColor(Color("Primary"))
         .background(Color.black.opacity(0.4).ignoresSafeArea())
     }
 }

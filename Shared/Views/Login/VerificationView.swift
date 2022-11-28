@@ -12,15 +12,6 @@ struct VerificationView: View {
     //Go back to login page
     @Environment(\.presentationMode) var presentation
     
-    func getCodeAtIndex(index: Int) -> String {
-        if login.verCode.count > index {
-            let current = login.verCode.index(login.verCode.startIndex, offsetBy: index)
-            return String(login.verCode[current])
-        }
-        
-        return ""
-    }
-    
     var body: some View {
         ZStack{
             VStack(alignment: .leading, spacing: 20){
@@ -40,40 +31,43 @@ struct VerificationView: View {
                 Spacer()
                 
                 //User input for verification code
-                VStack(alignment: .center, spacing: 15){
+                VStack(alignment: .center, spacing: 30){
                     Text("請輸入驗證碼登入")
                         .font(.system(size: 25))
                         .bold()
                     
                     HStack{
                         TextField(
-                            "點擊輸入驗證碼",
+                            "- - - - - -",
                             text: $login.verCode
                         )
                         .textInputAutocapitalization(.never)
                         .disableAutocorrection(true)
                         .keyboardType(.numberPad)
+                        .font(.system(size: 70))
+                        .multilineTextAlignment(.center)
                     }
                     .padding()
                     .frame(height: 70)
-                    .background(RoundedRectangle(cornerRadius: 20).stroke(Color("Background"), lineWidth: 3))
                     .font(.system(size: 20))
                     
-                    //Submit button
-                    Button (action: login.verifyCode, label: {
-                        GenericButton(buttonText: "開始使用APP", bgColor:Color("Primary"), fgColor: Color("Primary Opposite"), height:70, fontSize:20, curve: 20)
-                    })
-                    
-                    //Resend code
-                    Button (action: login.resendCode, label: {
-                        GenericButton(buttonText: "重新發送驗證碼", bgColor:Color("Secondary").opacity(0.8), fgColor: Color("Button Text"), height:70, fontSize:20, curve: 20)
-                    })
-                    
-                    //Cancel and go back button
-                    Button {
-                        self.presentation.wrappedValue.dismiss()
-                    } label: {
-                        GenericButton(buttonText: "取消重來", bgColor:Color("Cancel"), fgColor: Color("Button Text"), height:70, fontSize:20, curve: 20)
+                    VStack (spacing:10){
+                        //Submit button
+                        Button (action: login.verifyCode, label: {
+                            GenericButton(buttonText: "開始使用APP", bgColor:Color("Primary"), fgColor: Color("Primary Opposite"), height:70, fontSize:20, curve: 30)
+                        })
+                        
+                        //Resend code
+                        Button (action: login.resendCode, label: {
+                            GenericButton(buttonText: "重新發送驗證碼", bgColor:Color("Secondary").opacity(0.8), fgColor: Color("Button Text"), height:70, fontSize:20, curve: 30)
+                        })
+                        
+                        //Cancel and go back button
+                        Button {
+                            self.presentation.wrappedValue.dismiss()
+                        } label: {
+                            GenericButton(buttonText: "取消重來", bgColor:Color("Cancel"), fgColor: Color("Button Text"), height:70, fontSize:20, curve: 30)
+                        }
                     }
                 }
                 .frame(maxWidth: .infinity)
@@ -87,6 +81,7 @@ struct VerificationView: View {
             .padding([.top,.bottom],20)
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
+            .foregroundColor(Color("Primary"))
             
             if login.showAlertVer {
                 AlertView(show: $login.showAlertVer, inputToDelete: $login.verCode, errorMsg: login.alertMsgVer, buttonName: "重試")

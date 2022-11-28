@@ -194,7 +194,7 @@ struct AddView: View {
                             .sheet(isPresented: $cameraPresented) {
                                 ScannerView(openScanner: $cameraPresented, scanResult: $scanResult, lastName: $lastName, firstName: $firstName, phoneNumber: $phoneNumber)
                             }
-                            .alert("Scanner not available", isPresented: $scannerNotAvailableAlert, actions:{})
+                            .alert("無法讀取", isPresented: $scannerNotAvailableAlert, actions:{})
                             .onAppear {
                                 scannerAvailable = (DataScannerViewController.isSupported && DataScannerViewController.isAvailable)
                             }
@@ -227,11 +227,11 @@ struct AddView: View {
                                     .padding([.bottom, .leading, .trailing], 20)
                                 }
                                 .foregroundColor(Color("Primary Pink"))
-                                //.background(RoundedRectangle(cornerRadius: 20).stroke(Color("Primary Pink"), lineWidth: 10))
                                 .background(Color("Primary Opposite"))
                                 .cornerRadius(20)
                             }
                         }
+                        .padding([.leading,.trailing],15)
                         
                         //=========================================================
                         //
@@ -253,7 +253,7 @@ struct AddView: View {
                             .background(Color("Primary Pink"))
                             .cornerRadius(30)
                             
-                            VStack{
+                            VStack (alignment: .leading){
                                 //Step 3 instruction
                                 Text("請用以下其中一種方式設定聯絡人的頭像")
                                     .font(.system(size:20))
@@ -311,7 +311,7 @@ struct AddView: View {
                                         .padding([.top,.trailing], 20)
                                         .padding(.leading,10)
                     
-                                        Image(uiImage:UIImage(named: "Leopard")!)//data: self.imagePicked)!)
+                                        Image(uiImage:UIImage(data: self.imagePicked)!)
                                             .resizable()
                                             .frame(alignment: .center)
                                             .frame(maxWidth: .infinity)
@@ -332,6 +332,7 @@ struct AddView: View {
                                     .padding(.top,15)
                                 }
                             }
+                            .padding([.leading,.trailing],15)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -343,7 +344,7 @@ struct AddView: View {
                         Button{
                             uploadContact()
                         } label:{
-                            GenericButton(buttonText: "添加聯絡人", bgColor: (imagePicked.count > 0 && scanResult != "") ? Color("Confirm") : Color("Confirm").opacity(0.5), fgColor: Color("Button Text"), height:70, fontSize:20, curve: 20)
+                            GenericButton(buttonText: "添加聯絡人", bgColor: (imagePicked.count > 0 && scanResult != "") ? Color("Confirm") : Color("Confirm").opacity(0.5), fgColor: Color("Button Text"), height:70, fontSize:20, curve: 30)
                         }
                         .disabled(!(imagePicked.count > 0 && scanResult != ""))
                         
@@ -355,13 +356,13 @@ struct AddView: View {
                             imagePicked.removeAll(keepingCapacity: false)
                             scanResult = ""
                         } label:{
-                            GenericButton(buttonText: "重新來過", bgColor: Color("Cancel"), fgColor: Color("Button Text"), height:70, fontSize:20, curve: 20)
+                            GenericButton(buttonText: "重新來過", bgColor: Color("Cancel"), fgColor: Color("Button Text"), height:70, fontSize:20, curve: 30)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding([.leading,.trailing],40)
+                    .padding([.leading,.trailing],25)
                     .padding([.bottom],20)
-                    .padding([.top], 10)
+                    .padding([.top], 20)
                 }
             }
             .background(Color("Background"))
