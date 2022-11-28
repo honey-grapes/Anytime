@@ -27,32 +27,32 @@ struct RootView: View {
     @State var selectedTab: Tabs = .contact
     var body: some View {
         VStack(alignment:.leading){
-            if login_status {
-                NavigationStack{
-                    //Tab headers
-                    Header(login_status: $login_status, curTab: $selectedTab)
-                    
-                    //Content tabs
-                    TabView(selection: $selectedTab) {
-                        ContactView().tag(Tabs.contact)
-                        AddView().tag(Tabs.add)
-                        PicView().tag(Tabs.pic)
-                    }
-                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                    .edgesIgnoringSafeArea(.all)
+            NavigationView{
+                if login_status {
+                    NavigationStack{
+                        //Tab headers
+                        Header(login_status: $login_status, curTab: $selectedTab)
+                        
+                        //Content tabs
+                        TabView(selection: $selectedTab) {
+                            ContactView().tag(Tabs.contact)
+                            AddView().tag(Tabs.add)
+                            PicView().tag(Tabs.pic)
+                        }
+                        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                        .edgesIgnoringSafeArea(.all)
 
-                    //Tab bar
-                    //Passing the selectedTab variable through
-                    //So it will change with swipe or selection
-                    ATTabBar(selectedTab: $selectedTab)
+                        //Tab bar
+                        //Passing the selectedTab variable through
+                        //So it will change with swipe or selection
+                        ATTabBar(selectedTab: $selectedTab)
+                    }
+                    .preferredColorScheme(isDarkMode ? .dark : .light)
                 }
-                .preferredColorScheme(isDarkMode ? .dark : .light)
-            }
-            else {
-                NavigationView{
+                else {
                     LoginView()
-                        .navigationBarHidden(true)
-                        .navigationBarBackButtonHidden(true)
+                    .navigationBarHidden(true)
+                    .navigationBarBackButtonHidden(true)
                 }
             }
         }

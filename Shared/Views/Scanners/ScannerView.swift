@@ -22,10 +22,9 @@ struct ScannerView: View {
     var body: some View {
         VStack(alignment: .center){
             //Instruction
-            VStack(alignment: .leading){
-                (Text("⚠️  請在明亮處將相機對準聯絡人資料，看到字字清晰，周圍出現")+(Text("黃色框框")+Text(Image(systemName: "square.dashed"))).bold().foregroundColor(Color("Yellow Box"))+Text("後，") + Text("按下").bold() + (Text("黃色框框")+Text(Image(systemName: "square.dashed"))).bold().foregroundColor(Color("Yellow Box")) + Text("讀取資料"))
+            VStack(alignment: .center){
+                (Text("請按下") + (Text("黃色框框")+Text(Image(systemName: "square.dashed"))).bold().foregroundColor(Color("Yellow Box")) + Text("讀取資料"))
                     .font(.system(size: 20))
-                    .frame(alignment: .center)
                     .lineSpacing(5)
                 
                 ScannerViewController(openScanner: $openScanner, scanResult: $scanResult)
@@ -77,7 +76,7 @@ struct ScannerView: View {
                         }
                     }
                     label: {
-                        GenericButton(buttonText: "確定", bgColor: Color("Confirm"), fgColor: Color("Button Text"), height:50, fontSize:20, curve: 15)
+                        GenericButton(buttonText: "確定", bgColor: Color("Confirm"), fgColor: Color("Button Text"), height:60, fontSize:20, curve: 25)
                     }
                     .alert(reScanAlertMsg, isPresented: $reScanAlert){
                         Button("OK", role: .cancel) {}
@@ -89,7 +88,7 @@ struct ScannerView: View {
                         self.dismiss()
                     }
                     label: {
-                        GenericButton(buttonText: "取消重來", bgColor: Color("Cancel"), fgColor: Color("Button Text"), height:50, fontSize:20, curve: 15)
+                        GenericButton(buttonText: "取消重來", bgColor: Color("Cancel"), fgColor: Color("Button Text"), height:60, fontSize:20, curve: 25)
                     }
                 }
                 .padding(20)

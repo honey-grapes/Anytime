@@ -85,7 +85,7 @@ struct LoginView: View {
                             else if isAcceptable {
                                 Image(systemName: "checkmark.circle.fill")
                                     .font(.system(size: 25))
-                                    .foregroundColor(Color("Green Check"))
+                                    .foregroundColor(Color("Confirm"))
                             }
                         }
                         .padding()
@@ -106,7 +106,7 @@ struct LoginView: View {
                         NavigationLink(destination: VerificationView(login: login), isActive: $login.showVerifyView){
                             Button(action: login.sendCode,
                                    label: {
-                                GenericButton(buttonText: "獲取驗證碼", bgColor: isAcceptable ? Color("Primary Pink"): Color("Primary Pink").opacity(0.5), fgColor: Color("Primary Opposite"), height:70, fontSize:20, curve: 30)
+                                GenericButton(buttonText: "獲取驗證碼", bgColor: isAcceptable ? Color("Primary Pink"): Color("Primary Pink").opacity(0.6), fgColor: Color("Primary Opposite"), height:70, fontSize:20, curve: 30)
                             })
                             .disabled(!isAcceptable)
                         }

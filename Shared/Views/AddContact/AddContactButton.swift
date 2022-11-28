@@ -17,7 +17,8 @@ struct AddContactButton: View {
                         .font(.system(size: 60))
                         .tint(Color("Primary Opposite"))
                     Text(contactButtonText)
-                        .font(.system(size: 25))
+                        .font(.system(size: 20))
+                        .bold()
                         .foregroundColor(Color("Primary Opposite"))
         }
     }

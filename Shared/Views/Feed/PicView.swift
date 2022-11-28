@@ -12,6 +12,9 @@ struct PicView: View {
     @State var pressed = false
     var tempArray = ["詹喬棻", "辛阿米", "詹沛衡","詹喬棻", "辛阿米", "詹沛衡","詹喬棻", "辛阿米", "詹沛衡"]
     
+    //Image picker variables
+    @State var showUploadModal = false
+    
     //Contact list and name saved in UserDefaults
     @AppStorage("contactsList") var contactsList: Data = DefaultSettings.contactsList
     
@@ -25,19 +28,22 @@ struct PicView: View {
         ScrollView {
             HStack{
                 //Add story button
-                Button(action: {}
-                       ,label: {
-                    (Text("上傳圖片 ") + Text(Image(systemName: "camera.macro")))
-                        .font(.system(size: 20))
-                        .bold()
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .foregroundColor(Color("Primary Opposite"))
-                        .background(Color("Primary Pink"))
-                        .cornerRadius(30)
-                })
-                .padding(.top, 20)
-                .padding(.bottom, 10)
+                NavigationLink(destination: AddPostView(), isActive: $showUploadModal){
+                    Button(action: {
+                        showUploadModal.toggle()
+                    },label: {
+                        (Text("上傳圖片 ") + Text(Image(systemName: "camera.macro")))
+                            .font(.system(size: 20))
+                            .bold()
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .foregroundColor(Color("Primary Opposite"))
+                            .background(Color("Primary Pink"))
+                            .cornerRadius(30)
+                    })
+                    .padding(.top, 20)
+                    .padding(.bottom, 10)
+                }
                 
                 //Refresh button
                 Button(action: {}
