@@ -38,7 +38,7 @@ struct AddPostView: View {
         let fileRef = storageRef.child(imagePath)
         
         //Upload image to storage then save a post into Firestore
-        let uploadTask = fileRef.putData(postPicked) { metadata, error in
+        fileRef.putData(postPicked) { metadata, error in
             postAdded = true //For notification
             updatePosts = true //For re-fetching contacts
             

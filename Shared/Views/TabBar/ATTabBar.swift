@@ -42,7 +42,8 @@ struct ATTabBar: View {
             }.tint(picColor)
             Spacer()
         }
-        .padding(.top,15)
+        .padding(.top,25)
+        .padding(.bottom,50)
     }
 }
 

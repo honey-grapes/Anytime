@@ -23,7 +23,6 @@
 		600A082228FFCDE500FE5C6B /* ATTabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600A082028FFCDE500FE5C6B /* ATTabButton.swift */; };
 		600A082528FFDBF400FE5C6B /* PicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600A082428FFDBF400FE5C6B /* PicView.swift */; };
 		600A082628FFDBF400FE5C6B /* PicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600A082428FFDBF400FE5C6B /* PicView.swift */; };
-		600B4D04291D239400E00C08 /* Leopard.png in Resources */ = {isa = PBXBuildFile; fileRef = 600B4D03291D239300E00C08 /* Leopard.png */; };
 		600B4D06291EBA7200E00C08 /* LoadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600B4D05291EBA7100E00C08 /* LoadView.swift */; };
 		600B4D082932F8A000E00C08 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600B4D072932F8A000E00C08 /* PostModel.swift */; };
 		600B4D0A29350A3F00E00C08 /* AddPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600B4D0929350A3F00E00C08 /* AddPostView.swift */; };
@@ -50,6 +49,7 @@
 		6095CA14291974A500F8C60A /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6095CA13291974A500F8C60A /* AlertView.swift */; };
 		6095CA172919757F00F8C60A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6095CA162919757F00F8C60A /* SettingsView.swift */; };
 		60C07F51291A1D1D00BCDC7B /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C07F50291A1D1D00BCDC7B /* ContactModel.swift */; };
+		60EEBD9F29391A3700A7379A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EEBD9E29391A3700A7379A /* SplashView.swift */; };
 		60F8E7382903111F00F991F1 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F8E7372903111F00F991F1 /* ScannerView.swift */; };
 		60F8E7392903111F00F991F1 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F8E7372903111F00F991F1 /* ScannerView.swift */; };
 /* End PBXBuildFile section */
@@ -66,7 +66,6 @@
 		600A081D28FF7B2D00FE5C6B /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		600A082028FFCDE500FE5C6B /* ATTabButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATTabButton.swift; sourceTree = "<group>"; };
 		600A082428FFDBF400FE5C6B /* PicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicView.swift; sourceTree = "<group>"; };
-		600B4D03291D239300E00C08 /* Leopard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Leopard.png; path = Shared/Leopard.png; sourceTree = SOURCE_ROOT; };
 		600B4D05291EBA7100E00C08 /* LoadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadView.swift; sourceTree = "<group>"; };
 		600B4D072932F8A000E00C08 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		600B4D0929350A3F00E00C08 /* AddPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostView.swift; sourceTree = "<group>"; };
@@ -84,6 +83,7 @@
 		6095CA13291974A500F8C60A /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		6095CA162919757F00F8C60A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		60C07F50291A1D1D00BCDC7B /* ContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
+		60EEBD9E29391A3700A7379A /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		60F8E7372903111F00F991F1 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,7 +127,6 @@
 				6095CA0229174C2000F8C60A /* Views */,
 				6095CA0129174C1A00F8C60A /* Controllers */,
 				600A07FB28FE202D00FE5C6B /* Assets.xcassets */,
-				600B4D03291D239300E00C08 /* Leopard.png */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -200,6 +199,7 @@
 				6095CA13291974A500F8C60A /* AlertView.swift */,
 				600B4D05291EBA7100E00C08 /* LoadView.swift */,
 				60364B182904FE5A003C1078 /* GenericButton.swift */,
+				60EEBD9E29391A3700A7379A /* SplashView.swift */,
 				6095CA0529174CE000F8C60A /* Login */,
 				6095CA15291974EF00F8C60A /* Settings */,
 				605A37D0290148D1001D23EE /* AddContact */,
@@ -344,7 +344,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				600B4D04291D239400E00C08 /* Leopard.png in Resources */,
 				600A080D28FE202D00FE5C6B /* Assets.xcassets in Resources */,
 				602EFF0029066E760072DC19 /* GoogleService-Info.plist in Resources */,
 			);
@@ -383,6 +382,7 @@
 				6095CA102918642C00F8C60A /* VerificationView.swift in Sources */,
 				60364B1F2905C081003C1078 /* ImagePickerView.swift in Sources */,
 				600A082528FFDBF400FE5C6B /* PicView.swift in Sources */,
+				60EEBD9F29391A3700A7379A /* SplashView.swift in Sources */,
 				60F8E7382903111F00F991F1 /* ScannerView.swift in Sources */,
 				600A081828FF6C4F00FE5C6B /* ATTabBar.swift in Sources */,
 				600B4D0A29350A3F00E00C08 /* AddPostView.swift in Sources */,

@@ -20,7 +20,7 @@ struct ATTabButton: View {
                 .font(.system(size:50))
                 .foregroundColor(iconColor)
             Text(buttonLabel)
-                .font(.system(size:35))
+                .font(.system(size:30))
                 .foregroundColor(iconColor)
         }
     }

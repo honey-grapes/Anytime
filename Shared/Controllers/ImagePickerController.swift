@@ -47,7 +47,7 @@ struct ImagePickerController: UIViewControllerRepresentable{
             let newWidth = image.size.width * ratio
             let newHeight = image.size.height * ratio
             let resize = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
-            let resizedImage = UIGraphicsImageRenderer(size: CGSize(width: newWidth, height: newWidth)).image{ _ in
+            let resizedImage = UIGraphicsImageRenderer(size: CGSize(width: 100.0, height: 100.0)).image{ _ in
                 image.draw(in: resize)
             }
             //Save image and close the controller in png format

@@ -22,7 +22,7 @@ struct AddView: View {
     @State private var lastName: String = ""
     @State private var firstName: String = ""
     @State private var phoneNumber: String = ""
-    @State private var areaCode: String = ""
+    @State private var areaCode: String = "+1"
     
     //Image picker variables
     @State var imagePicked: Data = .init(capacity: 0)
@@ -48,7 +48,7 @@ struct AddView: View {
         let fileRef = storageRef.child(imagePath)
         
         //Upload image to storage then save a contact into Firestore
-        let uploadTask = fileRef.putData(imagePicked) { metadata, error in
+        fileRef.putData(imagePicked) { metadata, error in
             contactAdded = true //For notification
             updateContact = true //For re-fetching contacts
             

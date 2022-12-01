@@ -23,6 +23,7 @@ struct RootView: View {
     @AppStorage("isDarkMode") var isDarkMode = DefaultSettings.darkMode
     @AppStorage("login_status") var login_status = DefaultSettings.login_status
     @AppStorage("updateContact") var updateContact = DefaultSettings.updateContact
+    @AppStorage("updatePosts") var updatePosts = DefaultSettings.updatePosts
     
     //Creates binding and stores the state
     @State var selectedTab: Tabs = .contact
@@ -31,22 +32,24 @@ struct RootView: View {
             NavigationView{
                 if login_status {
                     NavigationStack{
-                        //Tab headers
-                        Header(login_status: $login_status, curTab: $selectedTab)
-                        
-                        //Content tabs
-                        TabView(selection: $selectedTab) {
-                            ContactView().tag(Tabs.contact)
-                            AddView().tag(Tabs.add)
-                            PicView().tag(Tabs.pic)
-                        }
-                        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                        .edgesIgnoringSafeArea(.all)
+                        VStack(spacing: 0){
+                            //Tab headers
+                            Header(login_status: $login_status, curTab: $selectedTab)
+                            
+                            //Content tabs
+                            TabView(selection: $selectedTab) {
+                                ContactView().tag(Tabs.contact)
+                                AddView().tag(Tabs.add)
+                                PicView().tag(Tabs.pic)
+                            }
+                            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
 
-                        //Tab bar
-                        //Passing the selectedTab variable through
-                        //So it will change with swipe or selection
-                        ATTabBar(selectedTab: $selectedTab)
+                            //Tab bar
+                            //Passing the selectedTab variable through
+                            //So it will change with swipe or selection
+                            ATTabBar(selectedTab: $selectedTab)
+                        }
+                        .ignoresSafeArea()
                     }
                     .preferredColorScheme(isDarkMode ? .dark : .light)
                 }
@@ -59,6 +62,7 @@ struct RootView: View {
         }
         .onAppear {
             updateContact = true
+            updatePosts = true
         }
     }
 }

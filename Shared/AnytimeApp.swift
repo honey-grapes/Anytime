@@ -14,9 +14,7 @@ struct AnytimeApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            TabView{
-                RootView()
-            }
+            SplashView()
         }
     }
 }

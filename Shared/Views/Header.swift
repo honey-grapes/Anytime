@@ -17,24 +17,23 @@ struct Header: View {
     
     var body: some View {
         HStack{
-            
             if curTab == .add {
                 Text(tabHeader1)
-                    .font(.system(size: 40))
+                    .font(.system(size: 35))
                     .fontWeight(.bold)
                     .padding(.top,20)
                     .padding(.leading,40)
                     .foregroundColor(Color("Primary"))
             } else if curTab == .contact {
                 Text(tabHeader2)
-                    .font(.system(size: 40))
+                    .font(.system(size: 35))
                     .fontWeight(.bold)
                     .padding(.top,20)
                     .padding(.leading,40)
                     .foregroundColor(Color("Primary"))
             } else {
                 Text(tabHeader3)
-                    .font(.system(size: 40))
+                    .font(.system(size: 35))
                     .fontWeight(.bold)
                     .padding(.top,20)
                     .padding(.leading,40)
@@ -42,7 +41,6 @@ struct Header: View {
             }
             
             Spacer()
-            
             
             NavigationLink(destination: SettingsView(login_status: $login_status, curTab: $curTab)) {
                 Image(systemName: "gearshape.fill")
@@ -52,6 +50,8 @@ struct Header: View {
                     .foregroundColor(Color("Primary"))
             }
         }
+        .padding(.top,45)
+        .padding(.bottom,20)
     }
 }
 

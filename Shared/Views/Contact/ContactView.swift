@@ -14,9 +14,11 @@ struct ContactView: View {
     var uuid: String? {
         Auth.auth().currentUser?.uid
     }
+    @AppStorage("userNumber") var userNumber = DefaultSettings.userNumber
     
-    //Fetch contacts only when the app launches or when a new contact is added
+    //Fetch contacts and posts only when the app launches or when a new contact is added
     @AppStorage("updateContact") var updateContact = DefaultSettings.updateContact
+    @AppStorage("updatePosts") var updatePosts = DefaultSettings.updatePosts
     @AppStorage("contactsList") var contactsList: Data = DefaultSettings.contactsList
     @State var retrievedContacts: [ContactModel] = []
     
@@ -67,7 +69,8 @@ struct ContactView: View {
                             storageRef.child(profilePicURL).getData(maxSize: 10 * 1024 * 1024) { data, error in
                                 if error == nil && data != nil {
                                     contactToReturn.append(ContactModel(firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, profilePic: data!))
-                                    updateContact = false //Convert to "true" if a contact is added or when the app was in the background
+                                    //Convert to "true" if a contact is added or when the app was in the background
+                                    updateContact = false
                                     
                                     group.leave()
                                 }
@@ -78,6 +81,7 @@ struct ContactView: View {
                         //Turn off loading view
                         loading = false
                         //Save temporary dictionary to UserDefaults
+                        tmp_contacts[self.userNumber] = "我" //Adding "me" to the contact list so your own post shows up later in the feed as well
                         guard let contactsList = try? JSONEncoder().encode(tmp_contacts) else {return}
                         self.contactsList = contactsList
                         
@@ -109,6 +113,7 @@ struct ContactView: View {
                             //Button to manually fetch and refresh contact
                             Button {
                                 updateContact = true
+                                updatePosts = true
                                 fetchContact() { contacts in
                                     self.retrievedContacts = contacts
                                 }
@@ -172,6 +177,7 @@ struct ContactView: View {
                     //Button to manually fetch and refresh contact
                     Button {
                         updateContact = true
+                        updatePosts = true
                         fetchContact() { contacts in
                             self.retrievedContacts = contacts
                         }
@@ -208,17 +214,3 @@ struct ContactView_Previews: PreviewProvider {
     }
 }
 
-/*
-Button(action: {
-    let phone = "tel://"
-    let phoneNumberformatted = phone + phoneNumber
-    guard let url = URL(string: phoneNumberformatted) else { return }
-    UIApplication.shared.open(url)
-})
-{
-    VStack{
-        Text("Call").font(.system(size: 50))
-    }
-    
-}
-*/
