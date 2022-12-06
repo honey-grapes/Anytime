@@ -35,6 +35,8 @@ class LoginModel: ObservableObject {
     //Login status
     @AppStorage("login_status") var login_status = DefaultSettings.login_status
     @AppStorage("userNumber") var userNumber = DefaultSettings.userNumber
+    @AppStorage("updateContact") var updateContact = DefaultSettings.updateContact
+    @AppStorage("updatePosts") var updatePosts = DefaultSettings.updatePosts
     
     //Get reference to the Firestore
     let db = Firestore.firestore()
@@ -75,7 +77,7 @@ class LoginModel: ObservableObject {
             self.loading = false
             self.userNumber = self.areaCode + self.userPhone
             
-            if let error = err {
+            if err != nil {
                 self.showAlertPhone.toggle()
                 return
             }
@@ -96,13 +98,15 @@ class LoginModel: ObservableObject {
             //Turn off loading view
             self.loading = false
             
-            if let error = err {
+            if err != nil {
                 self.showAlertVer.toggle()
                 return
             }
             
             //Logged in
             self.login_status = true
+            self.updateContact = true
+            self.updatePosts = true
             self.addUser()
         }
     }

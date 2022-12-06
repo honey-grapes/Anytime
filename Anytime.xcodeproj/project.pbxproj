@@ -40,6 +40,7 @@
 		605A37D629023374001D23EE /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605A37D429023374001D23EE /* Header.swift */; };
 		605A37DB29027BE9001D23EE /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605A37DA29027BE9001D23EE /* ScannerViewController.swift */; };
 		605A37DC29027BE9001D23EE /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605A37DA29027BE9001D23EE /* ScannerViewController.swift */; };
+		605B26602939CE0000BA25C7 /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B265F2939CE0000BA25C7 /* ConfirmView.swift */; };
 		6095C9FB2917129000F8C60A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6095C9FA2917129000F8C60A /* FirebaseAuth */; };
 		6095C9FD2917129000F8C60A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6095C9FC2917129000F8C60A /* FirebaseFirestore */; };
 		6095C9FF2917129000F8C60A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6095C9FE2917129000F8C60A /* FirebaseStorage */; };
@@ -76,6 +77,7 @@
 		605A37D1290148F6001D23EE /* AddContactButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactButton.swift; sourceTree = "<group>"; };
 		605A37D429023374001D23EE /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		605A37DA29027BE9001D23EE /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		605B265F2939CE0000BA25C7 /* ConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
 		6095CA00291728B200F8C60A /* Anytime--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Anytime--iOS--Info.plist"; sourceTree = "<group>"; };
 		6095CA0A29174D3300F8C60A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		6095CA0D2917AD5900F8C60A /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				600B4D05291EBA7100E00C08 /* LoadView.swift */,
 				60364B182904FE5A003C1078 /* GenericButton.swift */,
 				60EEBD9E29391A3700A7379A /* SplashView.swift */,
+				605B265F2939CE0000BA25C7 /* ConfirmView.swift */,
 				6095CA0529174CE000F8C60A /* Login */,
 				6095CA15291974EF00F8C60A /* Settings */,
 				605A37D0290148D1001D23EE /* AddContact */,
@@ -378,6 +381,7 @@
 				600A080928FE202D00FE5C6B /* AnytimeApp.swift in Sources */,
 				600B4D06291EBA7200E00C08 /* LoadView.swift in Sources */,
 				6095CA14291974A500F8C60A /* AlertView.swift in Sources */,
+				605B26602939CE0000BA25C7 /* ConfirmView.swift in Sources */,
 				600A082128FFCDE500FE5C6B /* ATTabButton.swift in Sources */,
 				6095CA102918642C00F8C60A /* VerificationView.swift in Sources */,
 				60364B1F2905C081003C1078 /* ImagePickerView.swift in Sources */,

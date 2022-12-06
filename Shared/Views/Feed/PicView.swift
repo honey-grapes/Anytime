@@ -12,6 +12,7 @@ import FirebaseStorage
 struct PicView: View {
     //Image picker variable
     @State var showUploadModal = false
+    @State var postAdded = false
     
     //State variables to dictate views
     @State var havePosts = true
@@ -55,6 +56,17 @@ struct PicView: View {
         }
     }
     
+    //Display temporary like from a user before Firebase update
+    func tmpLike(post: PostModel) -> String {
+        if post.likedByMe && !post.liked.contains(userNumber) {
+            if post.liked.count == 0 {
+                return "我"
+            }
+            return ", 我"
+        }
+        return ""
+    }
+    
     //Convert liked array into an array of names based on the contactsList dictionary
     func contactsWhoLiked(liked: [String]) -> [String] {
         let dic = decode(dic: contactsList)
@@ -85,11 +97,14 @@ struct PicView: View {
             let decodedContactList = decode(dic: contactsList)
             let contactNumbers = Array(decodedContactList.keys)
             
-            //Get contact documents from Firestore
+            //Get post documents from Firestore
             db.collection("posts").whereField("authorPhone", in: contactNumbers).getDocuments{ snapshot, error in
                 //Show the "no contact" view if the snapshot is nil or the snapshot contains no document
                 if snapshot == nil || (snapshot != nil && snapshot!.documents.count <= 0) {
                     havePosts = false
+                }
+                else {
+                    havePosts = true
                 }
                 
                 if error == nil && snapshot != nil {
@@ -122,8 +137,6 @@ struct PicView: View {
                     group.notify(queue: .main) {
                         //Turn off loading view
                         loading = false
-                        print(postsToReturn)
-                        
                         completion(postsToReturn.sorted{ (post1, post2) -> Bool in
                             return post1.date > post2.date
                         })
@@ -133,14 +146,37 @@ struct PicView: View {
         }
     }
     
+    //Delete contact
+    @State var showDeleteError = false
+    @State var showDeleteSuccess = false
+    @State var showDeleteModal = false
+    @State var postToDelete = ""
+    func deletePost(id: String) {
+        //Get reference to the Firestore
+        let db = Firestore.firestore()
+        //Delete
+        db.collection("posts").document(id).delete { err in
+            if err != nil {
+                showDeleteError = true
+            }
+            else {
+                updatePosts = true
+                fetchPosts { posts in
+                    self.retrievedPosts = posts
+                }
+                showDeleteSuccess = true
+            }
+        }
+    }
+    
     var body: some View {
         ZStack {
-            ScrollView {
-                if havePosts {
+            if havePosts {
+                ScrollView{
                     //Header
                     HStack{
                         //Add post button
-                        NavigationLink(destination: AddPostView(), isActive: $showUploadModal){
+                        NavigationLink(destination: AddPostView(postAdded: $postAdded), isActive: $showUploadModal){
                             Button(action: {
                                 showUploadModal.toggle()
                             },label: {
@@ -207,6 +243,24 @@ struct PicView: View {
                                     Image(uiImage: UIImage(data: retrievedPosts[n].postPic)!)
                                         .resizable()
                                         .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width - 40)
+                                        .overlay(alignment: .topLeading) {
+                                            //Only show the delete button if the current user is the author
+                                            if retrievedPosts[n].authorPhone == userNumber {
+                                                Button(action: {
+                                                    postToDelete = retrievedPosts[n].id
+                                                    showDeleteModal = true
+                                                }, label: {
+                                                    Image(systemName: "trash.fill")
+                                                        .foregroundColor(Color("Button Text"))
+                                                        .padding(7)
+                                                        .font(.system(size: 25))
+                                                })
+                                                .background(Color("Primary Pink"))
+                                                .cornerRadius(15)
+                                                .padding([.top,.bottom], 15)
+                                                .padding([.leading,.trailing], 15)
+                                            }
+                                        }
                                     
                                     HStack (spacing: 20){
                                         //Heart button
@@ -228,7 +282,7 @@ struct PicView: View {
                                         //Contacts who liked your posts
                                         //If the page is yet to be refreshed after a new like, there will be a mismatch of likedByMe and liked. A Text will show "me" when likedByMe = true and liked does not reflect that
                                         (Text(contactsWhoLiked(liked: retrievedPosts[n].liked).joined(separator:", ")) +
-                                         Text(retrievedPosts[n].likedByMe && !retrievedPosts[n].liked.contains(userNumber) ? ", 我" : ""))
+                                         Text(tmpLike(post:retrievedPosts[n])))
                                             .font(.system(size: 17))
                                             .foregroundColor(Color("Secondary"))
                                             .lineSpacing(5)
@@ -247,11 +301,23 @@ struct PicView: View {
                         }
                     }
                 }
-                else {
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding([.leading,.trailing],20)
+                .background(Color("Background"))
+                .onAppear{
+                    if updatePosts {
+                        fetchPosts() { posts in
+                            self.retrievedPosts = posts
+                        }
+                    }
+                }
+            }
+            else {
+                VStack {
                     //Header
                     HStack{
                         //Add post button
-                        NavigationLink(destination: AddPostView(), isActive: $showUploadModal){
+                        NavigationLink(destination: AddPostView(postAdded: $postAdded), isActive: $showUploadModal){
                             Button(action: {
                                 showUploadModal.toggle()
                             },label: {
@@ -292,26 +358,46 @@ struct PicView: View {
                     }
                     
                     VStack (alignment: .center) {
+                        Spacer ()
+                        
                         Text("尚無圖片")
-                            .foregroundColor(Color("Primary"))
-                            .font(.system(size: 30))
+                            .foregroundColor(Color("Secondary"))
+                            .font(.system(size: 25))
                             .bold()
+                        
+                        Spacer ()
                     }
                 }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding([.leading,.trailing],20)
-            .background(Color("Background"))
-            .onAppear{
-                if updatePosts {
-                    fetchPosts() { posts in
-                        self.retrievedPosts = posts
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding([.leading,.trailing],20)
+                .background(Color("Background"))
+                .onAppear{
+                    if updatePosts {
+                        fetchPosts() { posts in
+                            self.retrievedPosts = posts
+                        }
                     }
                 }
             }
             
             if loading {
                 LoadView(show: $loading, content: "載入圖片")
+            }
+            
+            if postAdded {
+                AlertView(show: $postAdded, inputToDelete: .constant(""), errorMsg: "成功添加圖片", buttonName: "確認")
+            }
+            
+            if showDeleteError {
+                AlertView(show: $showDeleteError, inputToDelete: .constant(""), errorMsg: "刪除錯誤", buttonName: "重試")
+            }
+            
+            if showDeleteSuccess {
+                AlertView(show: $showDeleteSuccess, inputToDelete: .constant(""), errorMsg: "刪除成功", buttonName: "確認")
+            }
+            
+            if showDeleteModal {
+                ConfirmView(show: $showDeleteModal, msg: "確認刪除？", buttonName: "確認", action: deletePost, id: postToDelete)
             }
         }
     }

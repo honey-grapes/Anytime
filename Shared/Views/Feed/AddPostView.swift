@@ -20,7 +20,7 @@ struct AddPostView: View {
     @Environment(\.dismiss) private var dismiss
     
     //Notification when contact is successfully added
-    @State var postAdded = false
+    @Binding var postAdded: Bool
     
     //Tell contactView to update contacts
     @AppStorage("updatePosts") var updatePosts = DefaultSettings.updatePosts
@@ -40,7 +40,7 @@ struct AddPostView: View {
         //Upload image to storage then save a post into Firestore
         fileRef.putData(postPicked) { metadata, error in
             postAdded = true //For notification
-            updatePosts = true //For re-fetching contacts
+            updatePosts = true //For re-fetching posts
             
             //Check for errors
             if error == nil && metadata != nil {
@@ -57,6 +57,7 @@ struct AddPostView: View {
                 
                 //Remove post image after successfully adding contact to Firestore
                 postPicked.removeAll(keepingCapacity: false)
+                self.dismiss()
             }
         }
     }
@@ -113,7 +114,7 @@ struct AddPostView: View {
                                 Text(Image(systemName: "checkmark.circle.fill"))
                                     .font(.system(size: 55))
                                 
-                                Text(" 頭像選取成功")
+                                Text(" 圖片選取成功")
                                     .font(.system(size: 30))
                                     .bold()
                             }
@@ -146,8 +147,8 @@ struct AddPostView: View {
                     //Submit or cancel
                     VStack(alignment: .leading, spacing: 10){
                         Button{
+                            updatePosts = true
                             uploadPost()
-                            self.dismiss()
                         } label:{
                             GenericButton(buttonText: "分享圖片", bgColor: postPicked.count > 0  ? Color("Confirm") : Color("Confirm").opacity(0.5), fgColor: Color("Button Text"), height:70, fontSize:20, curve: 30)
                         }
@@ -180,6 +181,6 @@ struct AddPostView: View {
 
 struct AddPostView_Previews: PreviewProvider {
     static var previews: some View {
-        AddPostView()
+        AddPostView(postAdded: .constant(true))
     }
 }

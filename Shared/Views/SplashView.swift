@@ -29,7 +29,7 @@ struct SplashView: View {
                         .bold()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .foregroundColor(Color("Primary Opposite"))
+                .foregroundColor(.white)
                 .scaleEffect(self.size)
                 .opacity(self.opacity)
                 .onAppear {
