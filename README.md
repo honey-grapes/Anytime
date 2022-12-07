@@ -74,19 +74,21 @@ Instead of having the Add New Contact button tucked away in the corner, it is av
 I have decided to use the new <code>DataScannerViewController</code> API for inputting contact information because inputing contact information with voice is inefficient. A lot of characters sound the same in Mandarin and you would have to manually choose each character after voice recognition (see Note for more). In terms of handwriting recognition, I would like to conduct some user testing first to determine whether it is easy enough to use for my grandma.
 
 Writing down contact information on a piece of paper just like a traditional phonebook seems more intuitive than the two options above. I have provided the instructions on how to use the scanner and also a preview and option to re-scan. There are also two options to upload the profile photo. Whenever the user is navigated to another view or modal, it is made clear how to navigate back to the Add New Contact view.
-<br>
+
+After adding a new contact, users will also gain access to the new contact's posts on the feed. As shown in the GIF below, the user's feed is empty until a new contact "黃阿豹" with the number "+886987654321" is added. After the contact is added, the feed automatically fetches the new contact's posts based on their phone number.<br>
 
 <p align="center"><img src="https://media.giphy.com/media/t0SWfp0bzwE98IfgXb/giphy.gif"></p>
 
 **Note**: Voice recognition in Mandarin is much more effective in messaging because characters prioritized based on maximum likelihood estimation given a sentence or context. On the other hand, the characters in a name can be completely meaningless, contextless, and irrelevant to other characters in the name. It is also not unusual for people to use rare or obsolete characters in their names (only ~3,000 characters out of 50,000+ characters are used on a regular basis). In fact most people do not know how to pronounce the third character in my name because it's obsolete. In voice recognition, this character would likely be the 10th-15th option given characters with the same pronunciation.
 
 ### Call Contacts
-Instead of the usual list view in most communication iOS apps, I have implemented an interface where users can simply click on the pictures to make calls. 
+Instead of the usual list view in most communication iOS apps, I have implemented an image-focused interface where users can simply click on the pictures to make calls. Refresh is only triggered when the app opens, when a new contact is added, or when the refresh button is clicked. 
 
 <p align="center"><img src="https://media.giphy.com/media/cLMiuLLDYtzTD9SNRZ/giphy.gif"></p>
 
 
 ### Browse Feed and Add Posts
+This tab includes an interactive feed where users can upload pictures and like their contacts' posts. Users can share images onto the feed through camera or album without a caption. From observing  Refresh is only triggered when the app opens, when a new contact is added, when a new post is added, or when the refresh button is clicked. 
 <p align="center"><img src="https://media.giphy.com/media/rMc4QvPaj58Et1MByJ/giphy.gif"></p>
 
 
@@ -103,6 +105,7 @@ Instead of the usual list view in most communication iOS apps, I have implemente
 - Feed 
   - Move Feed into FeedViewModel
   - Implement limit and possibly drag to refresh functionalities
+  - Implement caption with voice recognition since voice recognition of sentences in Mandarin is quite effective
   - Better implementation for feed: I am considering modifying the feed so that you can only see a contact's feed after they've added you as well. Regarding likes given by contacts that have been deleted (therefore are no longer authorized to see your feed), maybe I could think of a way to delete their likes as well after they've been deleted.
 - Deployment: Currently I have completed the app in the development environment and have built and tested it on my phone. After more testing and tweaks, I plan to deploy and distribute the app through Firebase App Distribution and register my family members as testers. 
 
