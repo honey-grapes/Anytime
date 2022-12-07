@@ -82,7 +82,7 @@ After adding a new contact, users will also gain access to the new contact's pos
 **Note**: Voice recognition in Mandarin is much more effective in messaging because characters prioritized based on maximum likelihood estimation given a sentence or context. On the other hand, the characters in a name can be completely meaningless, contextless, and irrelevant to other characters in the name. It is also not unusual for people to use rare or obsolete characters in their names (only ~3,000 characters out of 50,000+ characters are used on a regular basis). In fact most people do not know how to pronounce the third character in my name because it's obsolete. In voice recognition, this character would likely be the 10th-15th option given characters with the same pronunciation.
 
 ### Call Contacts
-Instead of the usual list view in most communication iOS apps, I have implemented an image-focused interface where users can simply click on the pictures to make calls. Refresh is only triggered when the app opens, when a new contact is added, or when the refresh button is clicked. 
+Instead of the usual list view in most communication iOS apps, I have implemented an image-focused interface where users can simply click on the pictures to make calls. Refresh is only triggered when the app opens, when a contact is added / deleted, or when the refresh button is clicked. 
 
 <p align="center"><img src="https://media.giphy.com/media/cLMiuLLDYtzTD9SNRZ/giphy.gif"></p>
 
@@ -90,7 +90,7 @@ Instead of the usual list view in most communication iOS apps, I have implemente
 ### Browse Feed and Add Posts
 This tab includes an interactive feed where users can upload pictures and like their contacts' posts. Users can share images onto the feed through camera or album without a caption. From observing my grandma browsing the WeChat feed, I've noticed that she's more focused on browsing the pictures and sending likes as she finds it more difficult to read the captions or leave comments. I would like to conduct some user testing first to determine whether caption is necessary. If yes, I might implement it with voice recognition since sentences can be picked up by voice recognition quite accurately.
 
-Refresh is only triggered when the app opens, when a new contact is added, when a new post is added, or when the refresh button is clicked. 
+Refresh is only triggered when the app opens, when a contact is added / deleted, when a post is added / deleted, or when the refresh button is clicked. 
 <p align="center"><img src="https://media.giphy.com/media/rMc4QvPaj58Et1MByJ/giphy.gif"></p>
 
 
