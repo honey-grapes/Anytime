@@ -88,11 +88,14 @@ Instead of the usual list view in most communication iOS apps, I have implemente
 
 
 ### Browse Feed and Add Posts
-This tab includes an interactive feed where users can upload pictures and like their contacts' posts. Users can share images onto the feed through camera or album without a caption. From observing  Refresh is only triggered when the app opens, when a new contact is added, when a new post is added, or when the refresh button is clicked. 
+This tab includes an interactive feed where users can upload pictures and like their contacts' posts. Users can share images onto the feed through camera or album without a caption. From observing my grandma browsing the WeChat feed, I've noticed that she's more focused on browsing the pictures and sending likes as she finds it more difficult to read the captions or leave comments. I would like to conduct some user testing first to determine whether caption is necessary. If yes, I might implement it with voice recognition since sentences can be picked up by voice recognition quite accurately.
+
+Refresh is only triggered when the app opens, when a new contact is added, when a new post is added, or when the refresh button is clicked. 
 <p align="center"><img src="https://media.giphy.com/media/rMc4QvPaj58Et1MByJ/giphy.gif"></p>
 
 
 ### Dark Mode and Logout
+I have provided users with the option to switch to dark mode. The users can also log out and log into another phone number if desired.
 <p align="center"><img src="https://media.giphy.com/media/GLe028a7Eu5PWqiGjB/giphy.gif"></p>
 
 
