@@ -45,13 +45,19 @@ After searching the App Store, I cannot find a simple and accessible Mandarin co
 - Xcode 13.3.1+ is required to build an iOS Firebase project and Firebase is only compatible with iOS 11+. However, since this project utilizes the new <code>DataScannerViewController</code> API (Live Text API) launched in June 2022, its target platform is iOS 16+. 
 
 ## Features
-There are four key features: authentication, adding contact, browsing contact, and interactive feed
+There are four key features: 1) Authentication, 2) Add new contact, 3) Browsing contact, and 4) Interactive feed
 
 ### Login and Navigation
+Users can register with their phone numbers, considering seniors might not have emails, Facebook, or Twitter accounts. After registering and getting verified, they can start using the app. The app consists of three different views which are accessible through swiping and clicking on the customized navbar with big icons and font. From left to right on the navbar are Contacts, Add Contact, and Feed. A new user would have no contacts and no feed displayed. 
+
+The header shows the title of the page and Settings on the top righthand corner. This is where I put all the features that are deprioritized because they won't be accessed often. Currently there are three buttons, Dark Mode, Go Back, and Logout. 
+
 <img src="https://media.giphy.com/media/I5GN4JLZVTvmX5uQjw/giphy.gif">
 
 
-### Adding Contacts
+### Add New Contact
+
+
 <img src="https://media.giphy.com/media/t0SWfp0bzwE98IfgXb/giphy.gif">
 
 
@@ -67,15 +73,13 @@ There are four key features: authentication, adding contact, browsing contact, a
 <img src="https://media.giphy.com/media/GLe028a7Eu5PWqiGjB/giphy.gif">
 
 
-## Future Feature Implementations
+## Future Implementations
 - Contacts 
   - Move Contact into ContactViewModel
 - Add Contact
-  - Disable further steps in Add view unless previous steps are done
-  - Relationship option
+  - Disable further steps in the Add Contact view unless previous steps are completed
 - Feed 
-  - Better implementation for feed
   - Move Feed into FeedViewModel
-- Location 
-- Deployment: Currently the app is still in development phase
+  - Better implementation for feed: I am considering modifying the feed so that you can only see a contact's feed after they've added you as well. Regarding likes given by contacts that have been deleted (therefore are no longer authorized to see your feed), maybe I could think of a way to delete their likes as well after they've been deleted.
+- Deployment: Currently I have completed the app in the development environment and have built and tested it on my phone. After more testing and tweaks, I plan to deploy and distribute the app through Firebase App Distribution and register my family members as testers. 
 
