@@ -2,9 +2,20 @@
 ![Anytime Banner](https://user-images.githubusercontent.com/66938562/205561797-3e0e99aa-27d6-407c-b585-dda6e54fa8f7.png)
 
 ## About
+Anytime (通話易) is a Mandarin iOS communication app that aims to improve the accessibility of online communication for seniors built with Swift, SwiftUI, and Firebase. 
 
+### Rationale
+My rationale of creating this app is to facilitate online communication between my family members, especially with my grandma. I mostly communicate with my family through WeChat and WhatsApp. My grandma has a WeChat account but she is deterred from using to app and the iOS Phone app for several reasons.
 
-### Dependencies
+1. **Too many features**: One of the key detergents is that both of these communication apps have too many features that she does not use. To younger users, more features may be an appeal, but they may serve as obstacles to senior users. She found it overwhelming to look for the features she wants to use among the myriads of additional features. Since typing is not an option for her, the only features that are useful to her are calling and browsing her feed. 
+
+2. **Navigation not intuitive**: Similarly, she also told me she believes switching through different tabs and sheets is a hassle because she often forgets how to navigate back to the page where she was. On WeChat, you would have to navigate through at least 3 views to add a contact and 2 views to browse the feed. There are a lot of features that she does not use. She finds it frustrating to accidentally click into one and unable to navigate back to where she was.  
+
+3. **Hurdles in adding new contacts**: Typing isn't as intuitive for seniors especially when it comes to typing in Mandarin (It is a logogram unlike most phonogramic languages in the world. There are a lot of characters that sound the same but are vastly different in meaning and written form). Even Gen Xs like my parents prefer iOS's handwriting recognition and voice control for messaging. Due to this, my grandma needs assistance everytime when she adds a new contact. Moreover, the new contact buttons are often hidden in the corner and the page/sheet itself has many extraneous options such as ring tone, url, QR Code, and social media profile. To seniors, this makes the new contact feature confusing when all they want is to add the new contact's name and phone number for future use. 
+
+After searching the App Store, I cannot find a simple and accessible Mandarin communication app that suits her and many seniors' needs. Therefore I decided to develop an app myself and, in the future, deploy it privately through Firebase to my family members.
+
+### Prerequisites
 <p align="left">
  <!--Swift-->
 <img height="30" width:"30" src="https://img.shields.io/badge/Swift-FA7343?style=for-the-badge&logo=swift&logoColor=white" />
@@ -13,10 +24,10 @@
 </p>
 
 - Swift 5.6.1
-- iOS 16+
+- Targeting platform version iOS 16+
 - Built with Xcode 14+ (macOS Monterey 12.3+ required)
 
-**From FirebaseAuth, FirebaseFirestore, and FirebaseStorage packages**
+**From FirebaseAuth, FirebaseFirestore, and FirebaseStorage from the Firebase SDK package on Xcode**
 - Firebase 9.6.0
 - GoogleAppMeasurement 9.6.0
 - GoogleDataTransport 9.2.0
@@ -29,7 +40,13 @@
 - Promises 2.1.1
 - SwiftProtobuf 1.20.2
 
+### Setup
+- To clone this project for your own use, it might be a good idea to delete the <code>GoogleService-Info.plist</code> and [set up your own Firebase project](https://firebase.google.com/docs/ios/setup). 
+- Xcode 13.3.1+ is required to build an iOS Firebase project and Firebase is only compatible with iOS 11+. However, since this project utilizes the new <code>DataScannerViewController</code> API (Live Text API) launched in June 2022, its target platform is iOS 16+. 
+
 ## Features
+There are four key features: authentication, adding contact, browsing contact, and interactive feed
+
 ### Login and Navigation
 <img src="https://media.giphy.com/media/I5GN4JLZVTvmX5uQjw/giphy.gif">
 
