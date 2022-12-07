@@ -82,7 +82,7 @@ After adding a new contact, users will also gain access to the new contact's pos
 **Note**: Voice recognition in Mandarin is much more effective in messaging because characters prioritized based on maximum likelihood estimation given a sentence or context. On the other hand, the characters in a name can be completely meaningless, contextless, and irrelevant to other characters in the name. It is also not unusual for people to use rare or obsolete characters in their names (only ~3,000 characters out of 50,000+ characters are used on a regular basis). In fact most people do not know how to pronounce the third character in my name because it's obsolete. In voice recognition, this character would likely be the 10th-15th option given characters with the same pronunciation.
 
 ### Call Contacts
-Instead of the usual list view in most communication iOS apps, I have implemented an image-focused interface where users can simply click on the pictures to make calls. Refresh is only triggered when the app opens, when a contact is added / deleted, or when the refresh button is clicked. 
+Instead of the usual list view in most communication iOS apps, I have implemented an image-focused interface where users can simply click on the pictures to make calls. By adding a contact, the users will also gain access to the contact's posts and would be able to interact with the posts. On the flip side, deleting a contact will make you lose access to the contact's feed. Refresh is only triggered when the app opens, when a contact is added / deleted, or when the refresh button is clicked. 
 
 <p align="center"><img src="https://media.giphy.com/media/cLMiuLLDYtzTD9SNRZ/giphy.gif"></p>
 
